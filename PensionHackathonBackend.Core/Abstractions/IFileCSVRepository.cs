@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace PensionHackathonBackend.Core.Abstractions
 {
+    /* Интерфейс пользователя для облегчения добавления новых методов */
     public interface IFileCSVRepository
     {
         Task<Guid> Create(FileCSV file);

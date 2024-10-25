@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using PensionHackathonBackend.Infrastructure.Abstraction;
 using System;
 using System.Security.Cryptography;
 
 namespace PensionHackathonBackend.Infrastructure
 {
     /* Класс для хеширования паролей при регистрации и авторизации */
-    public class PasswordHasher
+    public class PasswordHasher : IPasswordHasher
     {
+        /* Метод генерации хэша по паролю */
         public string Generate(string password)
         {
             var salt = new byte[16];
@@ -25,6 +27,7 @@ namespace PensionHackathonBackend.Infrastructure
             return Convert.ToBase64String(salt) + ':' + hashed;
         }
 
+        /* Метод по проверке соответствия хэша пароля */
         public bool Verify(string hashedPassword, string providedPassword)
         {
             var parts = providedPassword.Split(':');

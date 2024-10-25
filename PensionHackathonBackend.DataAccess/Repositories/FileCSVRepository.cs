@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace PensionHackathonBackend.DataAccess.Repositories
 {
+    /* Репозиторий файла CSV для дальнейшей реализации CRUD запросов */
     public class FileCSVRepository(PensionHackathonDbContext context) : IFileCSVRepository
     {
         private readonly PensionHackathonDbContext _context = context;
 
+        /* Получение пользователей */
         public async Task<List<FileCSV>> Get()
         {
             var fileEntities = await _context.FileCSVs
@@ -26,9 +28,10 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return files;
         }
 
+        /* Создание нового пользователя */
         public async Task<Guid> Create(FileCSV file)
         {
-            var (fileCSV, Error) = FileCSV.Create(file.Id, file.FileName, file.FilePath, file.DateAdded);
+            var (fileCSV, _) = FileCSV.Create(file.Id, file.FileName, file.FilePath, file.DateAdded);
 
             await _context.FileCSVs.AddAsync(fileCSV);
             await _context.SaveChangesAsync();
@@ -36,6 +39,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return fileCSV.Id;
         }
 
+        /* Обновление пользователя */
         public async Task<Guid> Update(Guid id, string fileName, string filePath, DateTime dateAdded)
         {
             await _context.FileCSVs
@@ -48,6 +52,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return id;
         }
 
+        /* Удаление пользователя */
         public async Task<Guid> Delete(Guid id)
         {
             await _context.FileCSVs

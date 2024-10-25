@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PensionHackathonBackend.Core.Models;
+using PensionHackathonBackend.Infrastructure.Abstraction;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,10 +9,12 @@ using System.Text;
 
 namespace PensionHackathonBackend.Infrastructure
 {
-    public class JwtProvider(IOptions<JwtOptions> options)
+    /* Класс Jwt провайдера */
+    public class JwtProvider(IOptions<JwtOptions> options) : IJwtProvider
     {
         private readonly JwtOptions _options = options.Value;
 
+        /* Метод по генерации Jwt токена для конкретного пользователя */
         public string GenerateToken(User user)
         {
             Claim[] claims = [new("userId", user.Id.ToString())];

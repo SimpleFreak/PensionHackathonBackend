@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PensionHackathonBackend.Core.Models
 {
-    /* Класс файла для дальнейшего представления сущности для базы данных */
+    /* Класс файла CSV для дальнейшего представления сущности для базы данных */
     public class FileCSV
     {
         [Key, Required, NotNull]
@@ -19,6 +19,7 @@ namespace PensionHackathonBackend.Core.Models
         [Required, DataType(DataType.DateTime), NotNull]
         public DateTime DateAdded { get; set; }
 
+        /* Закрытый конструктор для обеспечения инкапсуляции */
         private FileCSV(Guid id, string fileName, string filePath, DateTime dateAdded)
         {
             Id = id;
@@ -27,6 +28,9 @@ namespace PensionHackathonBackend.Core.Models
             DateAdded = dateAdded;
         }
 
+        /* Реализация паттерна 'Фабричный метод' в виде статического метода
+         * по созданию объекта и возрата ошибки при наличии таковой
+         */
         public static (FileCSV fileCSV, string Error) Create(Guid id, string fileName,
             string filePath, DateTime dateAdded)
         {

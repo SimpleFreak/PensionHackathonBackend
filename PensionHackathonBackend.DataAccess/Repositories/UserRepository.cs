@@ -8,10 +8,23 @@ using System.Threading.Tasks;
 
 namespace PensionHackathonBackend.DataAccess.Repositories
 {
+    /* Репозиторий пользователя для дальнейшей реализации CRUD запросов */
     public class UserRepository(PensionHackathonDbContext context) : IUserRepository
     {
         private readonly PensionHackathonDbContext _context = context;
 
+        /* Получение пользователя по его логину */
+        public async Task<User> GetByLogin(string login)
+        {
+            var userEntity = await _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Login == login) ??
+                throw new Exception();
+
+            return userEntity;
+        }
+
+        /* Получение пользователей */
         public async Task<List<User>> Get()
         {
             var userEntities = await _context.Users
@@ -26,16 +39,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return users;
         }
 
-        public async Task<User> GetByLogin(string login)
-        {
-            var userEntity = await _context.Users
-                .AsNoTracking()
-                .FirstOrDefaultAsync(user => user.Login == login) ??
-                throw new Exception();
-
-            return userEntity;
-        }
-
+        /* Создание нового пользователя */
         public async Task<Guid> Create(User user)
         {
             var userEntity = User.Create(user.Id, user.Login, user.Password, user.Role);
@@ -46,6 +50,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return userEntity.User.Id;
         }
 
+        /* Обновление пользователя */
         public async Task<Guid> Update(Guid id, string login, string password, string role)
         {
             await _context.Users
@@ -58,6 +63,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return id;
         }
 
+        /* Удаление пользователя */
         public async Task<Guid> Delete(Guid id)
         {
             await _context.Users

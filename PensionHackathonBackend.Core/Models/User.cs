@@ -19,6 +19,7 @@ namespace PensionHackathonBackend.Core.Models
         [Required, NotNull]
         public string Role { get; set; } = string.Empty;
 
+        /* Закрытый конструктор для обеспечения инкапсуляции */
         private User(Guid id, string login, string password, string role)
         {
             Id = id;
@@ -27,6 +28,9 @@ namespace PensionHackathonBackend.Core.Models
             Role = role;
         }
 
+        /* Реализация паттерна 'Фабричный метод' в виде статического метода
+         * по созданию объекта и возрата ошибки при наличии таковой
+         */
         public static (User User, string Error) Create(Guid id, string login,
             string password, string role)
         {
