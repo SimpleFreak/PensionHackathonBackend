@@ -11,34 +11,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f9d2789-81df-4574-9956-979b23f6dcf3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend/PensionHackathonBackend.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend/PensionHackathonBackend.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend/appsettings.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserResponse/UserRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserResponse/UserResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PensionHackathonBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PensionHackathonBackend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/LoginUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserRequests/LoginUserRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/RegisterUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserRequests/RegisterUserRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserContract/UserRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserContract/UserResponse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/Users/LoginUserRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/Users/RegisterUserRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Endpoints/AdminPanelEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Endpoints/AdminPanelEndpoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Endpoints/UserEndpoint.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/ExceptionHandlingMiddleware.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Extensions/ApiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Extensions/ApiExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
 }]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2nw1bTABmU8vbwAHv1gDxr5es6y" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.PensionHackathonBackend: IIS Express.executor": "Run",
+    ".NET Launch Settings Profile.PensionHackathonBackend: http.executor": "Run",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Docker.PensionHackathonBackend/Dockerfile.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "albina",
     "node.js.detected.package.eslint": "true",
@@ -50,7 +71,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Docker.PensionHackathonBackend/Dockerfile">
+  <component name="RunManager" selected=".NET Launch Settings Profile.PensionHackathonBackend: http">
     <configuration name="PensionHackathonBackend: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/PensionHackathonBackend/PensionHackathonBackend.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
@@ -109,7 +130,10 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
   </component>
@@ -122,6 +146,7 @@
       <option name="presentableId" value="Default" />
       <updated>1729869396286</updated>
       <workItem from="1729869397451" duration="2341000" />
+      <workItem from="1729897808469" duration="1209000" />
     </task>
     <servers />
   </component>

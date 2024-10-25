@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using PensionHackathonBackend.Application.Services;
-using PensionHackathonBackend.Contracts.UserContract;
+using PensionHackathonBackend.Contracts.UserResponse;
 
 namespace PensionHackathonBackend.Endpoints;
 
@@ -32,9 +32,9 @@ public static class AdminPanelEndpoint
 
             return Results.Ok(users.Any(u => u.Id == id));
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
@@ -62,9 +62,9 @@ public static class AdminPanelEndpoint
             return Results.Ok(users);
 
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
@@ -87,9 +87,9 @@ public static class AdminPanelEndpoint
 
             return Results.Ok(response);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
@@ -112,9 +112,9 @@ public static class AdminPanelEndpoint
 
             return Results.Ok(userId);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
@@ -129,9 +129,9 @@ public static class AdminPanelEndpoint
             return Results.Ok(response);
 
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
@@ -143,9 +143,9 @@ public static class AdminPanelEndpoint
 
             return Results.Ok(response);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 }

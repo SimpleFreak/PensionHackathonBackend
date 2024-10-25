@@ -3,8 +3,8 @@ using PensionHackathonBackend.Application.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
-using PensionHackathonBackend.Contracts.UserContract;
 using System.Linq;
+using PensionHackathonBackend.Contracts.UserResponse;
 
 namespace PensionHackathonBackend.Controllers
 {

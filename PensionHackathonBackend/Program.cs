@@ -23,7 +23,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         var services = builder.Services;
         var configuration = builder.Configuration;
-            
+
         services.AddApiAuthentication(configuration);
         services.AddSwaggerGen();
 
@@ -31,16 +31,18 @@ public class Program
         
         builder.Services.AddDbContext<PensionHackathonDbContext>(options =>
             options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
-        
+
+        services.AddEndpointsApiExplorer();
+
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<UserService>();
-        
+
         services.AddScoped<IFileServiceRepository, FileServiceRepository>();
         services.AddScoped<FileService>();
 
         services.AddScoped<IJwtProvider, JwtProvider>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
-        
+
         services.AddCors(options =>
         {
             options.AddPolicy("AspNetApp", policyBuilder =>
@@ -51,7 +53,7 @@ public class Program
                 policyBuilder.AllowCredentials();
             });
         });
-            
+
         services.AddAntiforgery(options =>
         {
             options.Cookie.Name = "PensionFundAntiforgery";
@@ -60,12 +62,13 @@ public class Program
 
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) {
+        if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+        {
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
-
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                c.RoutePrefix = string.Empty; 
+               // c.RoutePrefix = string.Empty;
             });
         }
 
@@ -80,16 +83,16 @@ public class Program
         });
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
-            
+
         app.UseCors("AspNetApp");
-            
+
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseAntiforgery();
 
         app.AddMappedEndpoints();
-            
+
         app.MapGet("/", () => "Hello ForwardedHeadersOptions!");
 
         app.Run();
