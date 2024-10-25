@@ -14,4 +14,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PensionHackathonBackend.Application\PensionHackathonBackend.Application.csproj" />
+    <ProjectReference Include="..\PensionHackathonBackend.DataAccess\PensionHackathonBackend.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
