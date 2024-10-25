@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PensionHackathonBackend.App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PensionHackathonBackend.Infrastructure", "PensionHackathonBackend.Infrastructure\PensionHackathonBackend.Infrastructure.csproj", "{BFD38B79-BD78-4758-9490-8369AFF253F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PensionHackathonBackend.AdminPanel", "PensionHackathonBackend.AdminPanel\PensionHackathonBackend.AdminPanel.csproj", "{303A044E-5B69-4E98-A74A-FF61EC25E22D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PensionHackathonBackend.AdminPanel", "PensionHackathonBackend.AdminPanel\PensionHackathonBackend.AdminPanel.csproj", "{303A044E-5B69-4E98-A74A-FF61EC25E22D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PensionHackathonBackend.Modules", "PensionHackathonBackend.Modules\PensionHackathonBackend.Modules.csproj", "{73B26050-445C-4EE6-82FF-9BE589FCF9C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{303A044E-5B69-4E98-A74A-FF61EC25E22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{303A044E-5B69-4E98-A74A-FF61EC25E22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{303A044E-5B69-4E98-A74A-FF61EC25E22D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B26050-445C-4EE6-82FF-9BE589FCF9C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B26050-445C-4EE6-82FF-9BE589FCF9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B26050-445C-4EE6-82FF-9BE589FCF9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B26050-445C-4EE6-82FF-9BE589FCF9C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
