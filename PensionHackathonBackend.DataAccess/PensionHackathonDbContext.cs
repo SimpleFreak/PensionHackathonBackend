@@ -9,6 +9,6 @@ namespace PensionHackathonBackend.DataAccess
     {
         public DbSet<User> Users { get; set; }
 
-        public DbSet<FileCSV> FileCSVs { get; set; }
+        public DbSet<FileRecord> FileRecords { get; set; }
     }
 }

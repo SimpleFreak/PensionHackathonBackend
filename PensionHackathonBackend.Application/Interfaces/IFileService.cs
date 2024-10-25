@@ -2,18 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace PensionHackathonBackend.Application.Interfaces
 {
     /* Интерфейс файла CSV для облегения добаления новых методов */
-    public interface IFileCSVService
+    public interface IFileService
     {
-        Task<List<FileCSV>> GetAllFilesCSV();
-        
-        Task<Guid> CreateFileCSV(FileCSV fileCSV);
-
-        Task<Guid> UpdateFileCSV(Guid id, string fileName, string filePath, DateTime dateAdded);
-
-        Task<Guid> DeleteFileCSV(Guid id);
+        Task<Guid> SaveFileAsync(IFormFile file);
+        Task DeleteFileAsync(Guid fileId);
+        Task<List<FileRecord>> GetFilesAsync();
+        Task<FileRecord> GetFileByIdAsync(Guid fileId);
     }
 }

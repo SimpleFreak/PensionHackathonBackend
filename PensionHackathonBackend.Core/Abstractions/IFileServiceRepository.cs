@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 namespace PensionHackathonBackend.Core.Abstractions
 {
     /* Интерфейс пользователя для облегчения добавления новых методов */
-    public interface IFileCSVRepository
+    public interface IFileServiceRepository
     {
-        Task<Guid> Create(FileCSV file);
-
-        Task<Guid> Delete(Guid id);
-
-        Task<List<FileCSV>> Get();
-
-        Task<Guid> Update(Guid id, string fileName, string filePath, DateTime dateAdded);
+        Task<Guid> AddFileRecordAsync(FileRecord fileRecord);
+        Task<FileRecord> GetFileRecordAsync(Guid fileId);
+        Task<List<FileRecord>> GetFilesAsync();
+        Task DeleteFileRecordAsync(Guid fileId);
     }
 }

@@ -13,29 +13,26 @@ namespace PensionHackathonBackend.Application.Services
         IUserRepository userRepository, IJwtProvider jwtProvider) : IUserService
     {
         private readonly IPasswordHasher _passwordHasher = passwordHasher;
-        private readonly IUserRepository _userRepository = userRepository;
+        private readonly IUserRepository _usersRepository = userRepository;
         private readonly IJwtProvider _jwtProvider = jwtProvider;
 
-        /* Метод по обеспечению регистрации нового пользователя */
-        public async Task RegistrationUser(string login, string password, string role)
+        public async Task Register(string login, string password, string role)
         {
             var hashedPassword = _passwordHasher.Generate(password);
 
-            var (user, error) = User.Create(Guid.NewGuid(),
-                login, hashedPassword, role);
+            var (user, error) = User.Create(Guid.NewGuid(), login, hashedPassword, role);
 
             if (!string.IsNullOrEmpty(error))
             {
                 throw new Exception(error);
             }
 
-            await _userRepository.Create(user);
+            await _usersRepository.Create(user);
         }
 
-        /* Проверка логина и пароля */
-        public async Task<string> AuthorizationUser(string login, string password)
+        public async Task<string> Login(string login, string password)
         {
-            var user = await _userRepository.GetByLogin(login);
+            var user = await _usersRepository.GetByLogin(login);
 
             var result = _passwordHasher.Verify(password, user.Password);
 
@@ -49,29 +46,24 @@ namespace PensionHackathonBackend.Application.Services
             return token;
         }
 
-        /* Получение всех пользователей */
         public async Task<List<User>> GetAllUsers()
         {
-            return await _userRepository.Get();
+            return await _usersRepository.Get();
         }
 
-        /* Создание нового пользователя */
         public async Task<Guid> CreateUser(User user)
         {
-            return await _userRepository.Create(user);
+            return await _usersRepository.Create(user);
         }
 
-        /* Обновление данных пользователя */
-        public async Task<Guid> UpdateUser(Guid id,
-            string login, string password, string role)
+        public async Task<Guid> UpdateUser(Guid id, string login, string password, string role)
         {
-            return await _userRepository.Update(id, login, password, role);
+            return await _usersRepository.Update(id, login, password, role);
         }
 
-        /* Удаление пользователя */
         public async Task<Guid> DeleteUser(Guid id)
         {
-            return await _userRepository.Delete(id);
+            return await _usersRepository.Delete(id);
         }
     }
 }

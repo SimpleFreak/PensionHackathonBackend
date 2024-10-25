@@ -8,9 +8,9 @@ namespace PensionHackathonBackend.Application.Interfaces
     /* Интерфейс пользователя для облегчения добавления новых методов */
     public interface IUserService
     {
-        Task RegistrationUser(string login, string password, string role);
+        Task<string> Login(string login, string password);
 
-        Task<string> AuthorizationUser(string login, string password);
+        Task Register(string login, string password, string role);
 
         Task<List<User>> GetAllUsers();
 
