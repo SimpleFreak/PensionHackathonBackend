@@ -17,6 +17,7 @@ public static class ApiExtensions
         app.AddUsersEndpoints();
         app.AddAdminPanel();
         app.AddFileServiceEndpoints();
+        app.AddPdfServiceEndpoints();
     }
 
     public static void AddApiAuthentication(
