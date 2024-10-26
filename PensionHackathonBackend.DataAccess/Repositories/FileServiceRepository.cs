@@ -56,13 +56,14 @@ namespace PensionHackathonBackend.DataAccess.Repositories
 
         public async Task DeleteFileRecordAsync(Guid fileId)
         {
-            await _context.FileRecords
-                .Where(file => file.Id == fileId)
-                .ExecuteDeleteAsync();
-            
-            await _context.SaveChangesAsync();
-            
-            _cache.Remove(GetFilesCacheKey);
+            var fileRecord = await _context.FileRecords.FindAsync(fileId);
+            if (fileRecord != null)
+            {
+                _context.FileRecords.Remove(fileRecord);
+                await _context.SaveChangesAsync();
+        
+                _cache.Remove(GetFilesCacheKey);
+            }
         }
     }
 }
