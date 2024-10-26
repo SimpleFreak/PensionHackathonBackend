@@ -26,6 +26,8 @@ public class Program
 
         services.AddApiAuthentication(configuration);
         services.AddSwaggerGen();
+        
+        builder.Services.AddMemoryCache();
 
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
         
