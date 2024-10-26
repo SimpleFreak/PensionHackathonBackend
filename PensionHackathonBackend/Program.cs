@@ -49,7 +49,7 @@ public class Program
         {
             options.AddPolicy("AspNetApp", policyBuilder =>
             {
-                policyBuilder.WithOrigins("http://192.168.0.122:3333", "http://192.168.10.148:3333");
+                policyBuilder.WithOrigins("http://192.168.0.122:3333", "http://192.168.10.148:3333", "http://192.168.85.148:3333");
                 policyBuilder.AllowAnyHeader();
                 policyBuilder.AllowAnyMethod();
                 policyBuilder.AllowCredentials();
