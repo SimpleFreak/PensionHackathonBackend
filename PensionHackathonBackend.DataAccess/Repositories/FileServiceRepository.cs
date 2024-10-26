@@ -22,7 +22,9 @@ namespace PensionHackathonBackend.DataAccess.Repositories
 
         public async Task<FileRecord?> GetFileRecordAsync(Guid fileId)
         {
-            return await _context.FileRecords.FindAsync(fileId);
+            return await _context.FileRecords
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.Id == fileId);
         }
 
         public async Task<List<FileRecord>> GetFilesAsync()
@@ -34,12 +36,11 @@ namespace PensionHackathonBackend.DataAccess.Repositories
 
         public async Task DeleteFileRecordAsync(Guid fileId)
         {
-            var file = await _context.FileRecords.FindAsync(fileId);
-            if (file != null)
-            {
-                _context.FileRecords.Remove(file);
-                await _context.SaveChangesAsync();
-            }
+            await _context.FileRecords
+                .Where(file => file.Id == fileId)
+                .ExecuteDeleteAsync();
+            
+            await _context.SaveChangesAsync();
         }
     }
 }

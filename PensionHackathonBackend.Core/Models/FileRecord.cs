@@ -23,6 +23,11 @@ namespace PensionHackathonBackend.Core.Models
             FileName = fileName;
             DateAdded = dateAdded;
         }
+        
+        public FileRecord(Guid id)
+        {
+            Id = id;
+        }
 
         /* Реализация паттерна 'Фабричный метод' в виде статического метода
          * по созданию объекта и возрата ошибки при наличии таковой
