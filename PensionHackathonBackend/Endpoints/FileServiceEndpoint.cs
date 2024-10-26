@@ -27,52 +27,67 @@ public static class FileServiceEndpoint
             return Results.BadRequest("Invalid file.");
         }
 
-        try
+        return await ExecuteWithRetry(async () =>
         {
             var fileId = await fileService.SaveFileAsync(file);
             return Results.Ok(new { Message = "File uploaded successfully!", FileId = fileId });
-        }
-        catch (Exception ex)
-        {
-            return Results.BadRequest($"Error uploading file: {ex.Message}");
-        }
+        });
     }
 
     private static async Task<IResult> DeleteFile(Guid id, FileService fileService)
     {
-        try
+        return await ExecuteWithRetry(async () =>
         {
             await fileService.DeleteFileAsync(id);
             return Results.Ok("File deleted successfully.");
-        }
-        catch (FileNotFoundException ex)
-        {
-            return Results.NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return Results.BadRequest($"Error deleting file: {ex.Message}");
-        }
+        });
     }
     
     private static async Task<IResult> GetAllFilesAsync(FileService fileService)
     {
-        try
+        return await ExecuteWithRetry(async () =>
         {
             var files = await fileService.GetFilesAsync();
             return Results.Ok(files);
-        }
-        catch (Exception ex)
-        {
-            return Results.BadRequest($"Error retrieving files: {ex.Message}");
-        }
+        });
     }
 
     private static async Task<IResult> GetFileByIdAsync(Guid id, FileService fileService)
     {
-        var file = await fileService.GetFileByIdAsync(id);
-        return file != null
-            ? Results.Ok(file)
-            : Results.NotFound(new { Message = "File not found." });
+        return await ExecuteWithRetry(async () =>
+        {
+            var file = await fileService.GetFileByIdAsync(id);
+            return file != null
+                ? Results.Ok(file)
+                : Results.NotFound(new { Message = "File not found." });
+        });
+    }
+    
+    private static async Task<IResult> ExecuteWithRetry(Func<Task<IResult>> operation, int retries = 3)
+    {
+        for (int attempt = 0; attempt < retries; attempt++)
+        {
+            try
+            {
+                return await operation();
+            }
+            catch (FileNotFoundException ex)
+            {
+                return Results.NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Attempt {attempt + 1} failed: {ex.Message}");
+
+                if (attempt == retries - 1)
+                {
+                    return Results.BadRequest($"Error occurred: {ex.Message}");
+                }
+
+                await Task.Delay(1000); 
+            }
+        }
+
+        return Results.BadRequest("Unexpected error occurred.");
     }
 }
