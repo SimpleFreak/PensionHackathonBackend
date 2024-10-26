@@ -16,15 +16,15 @@ public static class AdminPanelEndpoint
         this IEndpointRouteBuilder app)
     {
         app.MapGet("GetUsers", GetUsers);
-        app.MapGet("Details", Details);
+        app.MapGet("Details/{id:int}", Details);
         app.MapPost("CreateUser", CreateUser);
-        app.MapPut("UpdateUser", UpdateUser);
-        app.MapDelete("DeleteUser", DeleteUser);
+        app.MapPut("UpdateUser/{id:int}", UpdateUser);
+        app.MapDelete("DeleteUser/{id:int}", DeleteUser);
 
         return app;
     }
 
-    private static async Task<IResult> UserExists(Guid id, UserService userService)
+    private static async Task<IResult> UserExists(int id, UserService userService)
     {
         try
         {
@@ -68,7 +68,7 @@ public static class AdminPanelEndpoint
         }
     }
 
-    private static async Task<IResult> Details(Guid id, UserService userService)
+    private static async Task<IResult> Details(int id, UserService userService)
     {
         try
         {
@@ -98,7 +98,6 @@ public static class AdminPanelEndpoint
         try
         {
             var (user, error) = Core.Models.User.Create(
-                Guid.NewGuid(),
                 request.Login,
                 request.Password,
                 request.Role);
@@ -119,7 +118,7 @@ public static class AdminPanelEndpoint
     }
 
     private static async Task<IResult> UpdateUser([FromBody] UserRequest request,
-        Guid id, UserService userService)
+        int id, UserService userService)
     {
         try
         {
@@ -135,7 +134,7 @@ public static class AdminPanelEndpoint
         }
     }
 
-    private static async Task<IResult> DeleteUser(Guid id, UserService userService)
+    private static async Task<IResult> DeleteUser(int id, UserService userService)
     {
         try
         {

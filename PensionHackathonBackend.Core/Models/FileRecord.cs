@@ -8,7 +8,7 @@ namespace PensionHackathonBackend.Core.Models
     public class FileRecord
     {
         [Key, Required, NotNull]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required, NotNull]
         public string FileName { get; set; } = string.Empty;
@@ -17,14 +17,13 @@ namespace PensionHackathonBackend.Core.Models
         public DateTime DateAdded { get; set; }
 
         /* Закрытый конструктор для обеспечения инкапсуляции */
-        private FileRecord(Guid id, string fileName, DateTime dateAdded)
+        private FileRecord(string fileName, DateTime dateAdded)
         {
-            Id = id;
             FileName = fileName;
             DateAdded = dateAdded;
         }
         
-        public FileRecord(Guid id)
+        public FileRecord(int id)
         {
             Id = id;
         }
@@ -32,7 +31,7 @@ namespace PensionHackathonBackend.Core.Models
         /* Реализация паттерна 'Фабричный метод' в виде статического метода
          * по созданию объекта и возрата ошибки при наличии таковой
          */
-        public static (FileRecord fileRecord, string Error) Create(Guid id, string fileName, DateTime dateAdded)
+        public static (FileRecord fileRecord, string Error) Create(string fileName, DateTime dateAdded)
         {
             var error = string.Empty;
 
@@ -46,7 +45,7 @@ namespace PensionHackathonBackend.Core.Models
                 error += "\nDateAdded cannot be undefined or empty.";
             }
 
-            var file = new FileRecord(id, fileName, dateAdded);
+            var file = new FileRecord(fileName, dateAdded);
 
             return (file, error);
         }

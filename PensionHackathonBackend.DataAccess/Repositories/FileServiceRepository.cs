@@ -17,7 +17,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
         
         private const string GetFilesCacheKey = "GetFilesCache";
         
-        public async Task<Guid> AddFileRecordAsync(FileRecord fileRecord)
+        public async Task<int> AddFileRecordAsync(FileRecord fileRecord)
         {
             await _context.FileRecords.AddAsync(fileRecord);
             await _context.SaveChangesAsync();
@@ -28,7 +28,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return fileRecord.Id;
         }
 
-        public async Task<FileRecord?> GetFileRecordAsync(Guid fileId)
+        public async Task<FileRecord?> GetFileRecordAsync(int fileId)
         {
             return await _context.FileRecords
                 .AsNoTracking()
@@ -54,7 +54,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return files;
         }
 
-        public async Task DeleteFileRecordAsync(Guid fileId)
+        public async Task DeleteFileRecordAsync(int fileId)
         {
             var fileRecord = await _context.FileRecords.FindAsync(fileId);
             if (fileRecord != null)

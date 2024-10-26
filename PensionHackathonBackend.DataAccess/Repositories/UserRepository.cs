@@ -33,16 +33,16 @@ namespace PensionHackathonBackend.DataAccess.Repositories
 
             var users = userEntities
                 .Select(user => User
-                    .Create(user.Id, user.Login, user.Password, user.Role).User)
+                    .Create(user.Login, user.Password, user.Role).User)
                 .ToList();
 
             return users;
         }
 
         /* Создание нового пользователя */
-        public async Task<Guid> Create(User user)
+        public async Task<int> Create(User user)
         {
-            var userEntity = User.Create(user.Id, user.Login, user.Password, user.Role);
+            var userEntity = User.Create(user.Login, user.Password, user.Role);
 
             await _context.Users.AddAsync(userEntity.User);
             await _context.SaveChangesAsync();
@@ -51,7 +51,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
         }
 
         /* Обновление пользователя */
-        public async Task<Guid> Update(Guid id, string login, string password, string role)
+        public async Task<int> Update(int id, string login, string password, string role)
         {
             await _context.Users
                 .Where(user => user.Id == id)
@@ -64,7 +64,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
         }
 
         /* Удаление пользователя */
-        public async Task<Guid> Delete(Guid id)
+        public async Task<int> Delete(int id)
         {
             await _context.Users
                 .Where(user => user.Id == id)

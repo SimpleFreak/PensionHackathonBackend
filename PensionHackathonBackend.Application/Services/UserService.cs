@@ -20,7 +20,7 @@ namespace PensionHackathonBackend.Application.Services
         {
             var hashedPassword = _passwordHasher.Generate(password);
 
-            var (user, error) = User.Create(Guid.NewGuid(), login, hashedPassword, role);
+            var (user, error) = User.Create(login, hashedPassword, role);
 
             if (!string.IsNullOrEmpty(error))
             {
@@ -51,17 +51,17 @@ namespace PensionHackathonBackend.Application.Services
             return await _usersRepository.Get();
         }
 
-        public async Task<Guid> CreateUser(User user)
+        public async Task<int> CreateUser(User user)
         {
             return await _usersRepository.Create(user);
         }
 
-        public async Task<Guid> UpdateUser(Guid id, string login, string password, string role)
+        public async Task<int> UpdateUser(int id, string login, string password, string role)
         {
             return await _usersRepository.Update(id, login, password, role);
         }
 
-        public async Task<Guid> DeleteUser(Guid id)
+        public async Task<int> DeleteUser(int id)
         {
             return await _usersRepository.Delete(id);
         }

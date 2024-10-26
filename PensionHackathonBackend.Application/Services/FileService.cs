@@ -16,7 +16,7 @@ namespace PensionHackathonBackend.Application.Services
         private readonly IWebHostEnvironment _environment = environment;
         private readonly IFileServiceRepository _fileServiceRepository = fileServiceRepository;
     
-        public async Task<Guid> SaveFileAsync(IFormFile file)
+        public async Task<int> SaveFileAsync(IFormFile file)
         {
             if (file == null || file.Length == 0) throw new ArgumentException("File is invalid.");
 
@@ -27,7 +27,7 @@ namespace PensionHackathonBackend.Application.Services
                 Directory.CreateDirectory(uploadPath);
             }
 
-            var fileRecord = FileRecord.Create(Guid.NewGuid(), file.FileName, DateTime.Today);
+            var fileRecord = FileRecord.Create(file.FileName, DateTime.Today);
             var fileName = $"{fileRecord.fileRecord.Id}_{fileRecord.fileRecord.FileName}";
             string filePath = Path.Combine(uploadPath, fileName);
 
@@ -41,7 +41,7 @@ namespace PensionHackathonBackend.Application.Services
             return fileRecord.fileRecord.Id;
         }
 
-        public async Task DeleteFileAsync(Guid fileId)
+        public async Task DeleteFileAsync(int fileId)
         {
             var fileRecord = await _fileServiceRepository.GetFileRecordAsync(fileId);
             if (fileRecord == null) throw new FileNotFoundException("File not found in the database.");
@@ -61,7 +61,7 @@ namespace PensionHackathonBackend.Application.Services
             return await _fileServiceRepository.GetFilesAsync();
         }
 
-        public async Task<FileRecord> GetFileByIdAsync(Guid fileId)
+        public async Task<FileRecord> GetFileByIdAsync(int fileId)
         {
             return await _fileServiceRepository.GetFileRecordAsync(fileId);
         }

@@ -8,9 +8,9 @@ namespace PensionHackathonBackend.Core.Abstractions
     /* Интерфейс пользователя для облегчения добавления новых методов */
     public interface IFileServiceRepository
     {
-        Task<Guid> AddFileRecordAsync(FileRecord fileRecord);
-        Task<FileRecord> GetFileRecordAsync(Guid fileId);
+        Task<int> AddFileRecordAsync(FileRecord fileRecord);
+        Task<FileRecord> GetFileRecordAsync(int fileId);
         Task<List<FileRecord>> GetFilesAsync();
-        Task DeleteFileRecordAsync(Guid fileId);
+        Task DeleteFileRecordAsync(int fileId);
     }
 }

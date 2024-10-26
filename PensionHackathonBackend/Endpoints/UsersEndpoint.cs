@@ -42,7 +42,7 @@ public static class UsersEndpoint
         return Results.Ok();
     }
 
-    private static async Task<IResult> Delete(Guid id, UserService userService, HttpContext context)
+    private static async Task<IResult> Delete(int id, UserService userService, HttpContext context)
     {
         return Results.Ok(await userService.DeleteUser(id));
     }

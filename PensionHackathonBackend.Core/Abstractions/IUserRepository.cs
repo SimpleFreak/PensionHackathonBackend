@@ -9,9 +9,9 @@ namespace PensionHackathonBackend.Core.Abstractions
     public interface IUserRepository
     {
         Task<List<User>> Get();
-        Task<Guid> Create(User user);
+        Task<int> Create(User user);
         Task<User> GetByLogin(string login);
-        Task<Guid> Update(Guid id, string login, string password, string role);
-        Task<Guid> Delete(Guid id);
+        Task<int> Update(int id, string login, string password, string role);
+        Task<int> Delete(int id);
     }
 }

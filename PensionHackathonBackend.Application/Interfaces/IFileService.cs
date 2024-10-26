@@ -9,9 +9,9 @@ namespace PensionHackathonBackend.Application.Interfaces
     /* Интерфейс файла CSV для облегения добаления новых методов */
     public interface IFileService
     {
-        Task<Guid> SaveFileAsync(IFormFile file);
-        Task DeleteFileAsync(Guid fileId);
+        Task<int> SaveFileAsync(IFormFile file);
+        Task DeleteFileAsync(int fileId);
         Task<List<FileRecord>> GetFilesAsync();
-        Task<FileRecord> GetFileByIdAsync(Guid fileId);
+        Task<FileRecord> GetFileByIdAsync(int fileId);
     }
 }

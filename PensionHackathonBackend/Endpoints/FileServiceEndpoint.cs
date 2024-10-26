@@ -14,9 +14,9 @@ public static class FileServiceEndpoint
     {
         app.MapPost("UploadFile", UploadFile)
             .DisableAntiforgery();;
-        app.MapDelete("DeleteFile{id:guid}", DeleteFile);
+        app.MapDelete("DeleteFile/{id:int}", DeleteFile);
         app.MapGet("GetAllFiles", GetAllFilesAsync);
-        app.MapGet("GetFile/{id:guid}", GetFileByIdAsync);
+        app.MapGet("GetFile/{id:int}", GetFileByIdAsync);
         return app;
     }
 
@@ -34,7 +34,7 @@ public static class FileServiceEndpoint
         });
     }
 
-    private static async Task<IResult> DeleteFile(Guid id, FileService fileService)
+    private static async Task<IResult> DeleteFile(int id, FileService fileService)
     {
         return await ExecuteWithRetry(async () =>
         {
@@ -52,7 +52,7 @@ public static class FileServiceEndpoint
         });
     }
 
-    private static async Task<IResult> GetFileByIdAsync(Guid id, FileService fileService)
+    private static async Task<IResult> GetFileByIdAsync(int id, FileService fileService)
     {
         return await ExecuteWithRetry(async () =>
         {
