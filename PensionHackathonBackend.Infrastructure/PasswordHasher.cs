@@ -11,7 +11,7 @@ namespace PensionHackathonBackend.Infrastructure
         /* Метод генерации хэша по паролю */
         public string Generate(string password)
         {
-            var salt = new byte[16];
+            var salt = new byte[64];
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(salt);
@@ -20,7 +20,7 @@ namespace PensionHackathonBackend.Infrastructure
             var hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
-                prf: KeyDerivationPrf.HMACSHA512,
+                prf: KeyDerivationPrf.HMACSHA256,
                 iterationCount: 10000,
                 numBytesRequested: 32));
 
@@ -42,7 +42,7 @@ namespace PensionHackathonBackend.Infrastructure
             var computedHash = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: hashedPassword,
                 salt: salt,
-                prf: KeyDerivationPrf.HMACSHA512,
+                prf: KeyDerivationPrf.HMACSHA256,
                 iterationCount: 10000,
                 numBytesRequested: 32));
 

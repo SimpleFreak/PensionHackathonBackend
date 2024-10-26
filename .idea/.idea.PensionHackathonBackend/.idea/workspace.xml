@@ -10,24 +10,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f9d2789-81df-4574-9956-979b23f6dcf3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserResponse/UserRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserResponse/UserResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PensionHackathonBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PensionHackathonBackend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/LoginUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserRequests/LoginUserRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/RegisterUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserRequests/RegisterUserRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserContract/UserRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/UserContract/UserResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/Users/LoginUserRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Contracts/Users/RegisterUserRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Endpoints/AdminPanelEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Endpoints/AdminPanelEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Endpoints/UserEndpoint.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/ExceptionHandlingMiddleware.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Extensions/ApiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Extensions/ApiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PensionHackathonBackend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PensionHackathonBackend/Program.cs" afterDir="false" />
-    </list>
+    <list default="true" id="2f9d2789-81df-4574-9956-979b23f6dcf3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,7 +129,7 @@
       <option name="presentableId" value="Default" />
       <updated>1729869396286</updated>
       <workItem from="1729869397451" duration="2341000" />
-      <workItem from="1729897808469" duration="1209000" />
+      <workItem from="1729897808469" duration="1830000" />
     </task>
     <servers />
   </component>
