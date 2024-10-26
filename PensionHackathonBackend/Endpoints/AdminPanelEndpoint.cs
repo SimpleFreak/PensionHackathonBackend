@@ -38,8 +38,8 @@ public static class AdminPanelEndpoint
         }
     }
 
-    private static async Task<IResult> GetUsers(string sortOrder,
-        string searchString, UserService userService)
+    private static async Task<IResult> GetUsers(string? sortOrder,
+        string? searchString, UserService userService)
     {
         try
         {
