@@ -1,4 +1,4 @@
-п»їusing System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -6,40 +6,28 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using PensionHackathonBackend.Application.Services;
-using PensionHackathonBackend.Contracts.UserContract;
+using PensionHackathonBackend.Contracts.UserResponse;
 
 namespace PensionHackathonBackend.Endpoints;
 
 public static class AdminPanelEndpoint
 {
+    /* Добавление всех методов для осуществления запросов панели администрации */
     public static IEndpointRouteBuilder AddAdminPanel(
         this IEndpointRouteBuilder app)
     {
         app.MapGet("GetUsers", GetUsers);
-        app.MapGet("Details", Details);
+        app.MapGet("Details/{id:int}", Details);
         app.MapPost("CreateUser", CreateUser);
-        app.MapPut("UpdateUser", UpdateUser);
-        app.MapDelete("DeleteUser", DeleteUser);
+        app.MapPut("UpdateUser/{id:int}", UpdateUser);
+        app.MapDelete("DeleteUser/{id:int}", DeleteUser);
 
         return app;
     }
 
-    private static async Task<IResult> UserExists(Guid id, UserService userService)
-    {
-        try
-        {
-            var users = await userService.GetAllUsers();
-
-            return Results.Ok(users.Any(u => u.Id == id));
-        }
-        catch (Exception exception)
-        {
-            return Results.BadRequest(exception);
-        }
-    }
-
-    private static async Task<IResult> GetUsers(string sortOrder,
-        string searchString, UserService userService)
+    /* Получение пользователей */
+    private static async Task<IResult> GetUsers(string? sortOrder,
+        string? searchString, UserService userService)
     {
         try
         {
@@ -62,13 +50,14 @@ public static class AdminPanelEndpoint
             return Results.Ok(users);
 
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
-    private static async Task<IResult> Details(Guid id, UserService userService)
+    /* Получение деталей конкретного пользователя */
+    private static async Task<IResult> Details(int id, UserService userService)
     {
         try
         {
@@ -87,18 +76,18 @@ public static class AdminPanelEndpoint
 
             return Results.Ok(response);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
+    /* Создание нового пользователя */
     private static async Task<IResult> CreateUser([FromBody] UserRequest request, UserService userService)
     {
         try
         {
             var (user, error) = Core.Models.User.Create(
-                Guid.NewGuid(),
                 request.Login,
                 request.Password,
                 request.Role);
@@ -112,14 +101,15 @@ public static class AdminPanelEndpoint
 
             return Results.Ok(userId);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
+    /* Обновление данных о пользователе */
     private static async Task<IResult> UpdateUser([FromBody] UserRequest request,
-        Guid id, UserService userService)
+        int id, UserService userService)
     {
         try
         {
@@ -129,13 +119,14 @@ public static class AdminPanelEndpoint
             return Results.Ok(response);
 
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 
-    private static async Task<IResult> DeleteUser(Guid id, UserService userService)
+    /* Удаление пользователя */
+    private static async Task<IResult> DeleteUser(int id, UserService userService)
     {
         try
         {
@@ -143,9 +134,9 @@ public static class AdminPanelEndpoint
 
             return Results.Ok(response);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return Results.BadRequest(exception);
+            return Results.BadRequest(ex);
         }
     }
 }

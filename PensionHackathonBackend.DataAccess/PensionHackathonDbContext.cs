@@ -7,8 +7,10 @@ namespace PensionHackathonBackend.DataAccess
     public class PensionHackathonDbContext(DbContextOptions<PensionHackathonDbContext> options)
         : DbContext(options)
     {
+        /* Хранение пользователей в базе данных */
         public DbSet<User> Users { get; set; }
 
-        public DbSet<FileCSV> FileCSVs { get; set; }
+        /* Хранение файлов в базе данных */
+        public DbSet<FileRecord> FileRecords { get; set; }
     }
 }

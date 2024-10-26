@@ -1,5 +1,6 @@
 ﻿namespace PensionHackathonBackend.Infrastructure.Abstraction
 {
+    /* Интерфейс хэширования паролей */
     public interface IPasswordHasher
     {
         string Generate(string password);

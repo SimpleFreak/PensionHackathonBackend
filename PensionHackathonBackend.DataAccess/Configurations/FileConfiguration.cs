@@ -5,16 +5,13 @@ using PensionHackathonBackend.Core.Models;
 namespace PensionHackathonBackend.DataAccess.Configurations
 {
     /* Конфигурация файла CSV */
-    public class FileCSVConfiguration : IEntityTypeConfiguration<FileCSV>
+    public class FileConfiguration : IEntityTypeConfiguration<FileRecord>
     {
-        public void Configure(EntityTypeBuilder<FileCSV> builder)
+        public void Configure(EntityTypeBuilder<FileRecord> builder)
         {
             builder.HasKey(file => file.Id);
 
             builder.Property(file => file.FileName)
-                .IsRequired();
-
-            builder.Property(file => file.FilePath)
                 .IsRequired();
 
             builder.Property(file => file.DateAdded)

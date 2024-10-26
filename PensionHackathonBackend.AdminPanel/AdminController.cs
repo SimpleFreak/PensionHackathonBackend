@@ -17,7 +17,7 @@ namespace PensionHackathonBackend.AdminPanel
         private readonly IUserService _userService = userService;
 
         /* Метод для проверки наличия пользователя по идентификатору */
-        private async Task<bool> UserExists(Guid id)
+        private async Task<bool> UserExists(int id)
         {
             var users = await _userService.GetAllUsers();
 
@@ -43,7 +43,7 @@ namespace PensionHackathonBackend.AdminPanel
 
         /* Запрос на получение деталей по пользователю */
         [HttpGet]
-        public async Task<ActionResult> Details(Guid id)
+        public async Task<ActionResult> Details(int id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(id)))
             {
@@ -64,11 +64,10 @@ namespace PensionHackathonBackend.AdminPanel
 
         /* Запрос на создание нового пользователя */
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateUser(
+        public async Task<ActionResult<int>> CreateUser(
             [FromBody] UserRequest request)
         {
             var (user, error) = Core.Models.User.Create(
-                Guid.NewGuid(),
                 request.Login,
                 request.Password,
                 request.Role);
@@ -84,8 +83,8 @@ namespace PensionHackathonBackend.AdminPanel
         }
 
         /* Запрос на обновление пользователя */
-        [HttpPut("{id:guid}")]
-        public async Task<ActionResult<Guid>> UpdateUser(Guid id,
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<int>> UpdateUser(int id,
             [FromBody] UserRequest request)
         {
             return Ok(await _userService.UpdateUser(id, request.Login, request.Password, request.Role));
@@ -94,7 +93,7 @@ namespace PensionHackathonBackend.AdminPanel
         /* Запрос на сохранение пользователя после его изменения */
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SaveUser(Guid id,
+        public async Task<ActionResult> SaveUser(int id,
             [FromBody] UserRequest user)
         {
             if (id != user.Id)
@@ -122,8 +121,8 @@ namespace PensionHackathonBackend.AdminPanel
         }
 
         /* Запрос на удаление пользователя */
-        [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<Guid>> DeleteUser(Guid id)
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<int>> DeleteUser(int id)
         {
             return Ok(await _userService.DeleteUser(id));
         }

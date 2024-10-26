@@ -1,19 +1,18 @@
 ﻿using PensionHackathonBackend.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PensionHackathonBackend.Core.Abstractions
 {
     /* Интерфейс пользователя для облегчения добавления новых методов */
-    public interface IFileCSVRepository
+    public interface IFileServiceRepository
     {
-        Task<Guid> Create(FileCSV file);
+        Task<int> AddFileRecordAsync(FileRecord fileRecord);
 
-        Task<Guid> Delete(Guid id);
+        Task<FileRecord> GetFileRecordAsync(int fileId);
 
-        Task<List<FileCSV>> Get();
+        Task<List<FileRecord>> GetFilesAsync();
 
-        Task<Guid> Update(Guid id, string fileName, string filePath, DateTime dateAdded);
+        Task DeleteFileRecordAsync(int fileId);
     }
 }

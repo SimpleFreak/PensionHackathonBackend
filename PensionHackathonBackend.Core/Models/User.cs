@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PensionHackathonBackend.Core.Models
@@ -8,7 +7,7 @@ namespace PensionHackathonBackend.Core.Models
     public class User
     {
         [Key, Required, NotNull]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required, NotNull]
         public string Login { get; set; } = string.Empty;
@@ -20,9 +19,8 @@ namespace PensionHackathonBackend.Core.Models
         public string Role { get; set; } = string.Empty;
 
         /* Закрытый конструктор для обеспечения инкапсуляции */
-        private User(Guid id, string login, string password, string role)
+        private User( string login, string password, string role)
         {
-            Id = id;
             Login = login;
             Password = password;
             Role = role;
@@ -31,7 +29,7 @@ namespace PensionHackathonBackend.Core.Models
         /* Реализация паттерна 'Фабричный метод' в виде статического метода
          * по созданию объекта и возрата ошибки при наличии таковой
          */
-        public static (User User, string Error) Create(Guid id, string login,
+        public static (User User, string Error) Create(string login,
             string password, string role)
         {
             var error = string.Empty;
@@ -52,7 +50,7 @@ namespace PensionHackathonBackend.Core.Models
                 error += "\nRole cannot be undefined or empty.";
             }
 
-            var user = new User(id, login, password, role);
+            var user = new User( login, password, role);
 
             return (user, error);
         }
