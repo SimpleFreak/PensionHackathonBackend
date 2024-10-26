@@ -63,7 +63,7 @@ public static class FileServiceEndpoint
         });
     }
     
-    private static async Task<IResult> ExecuteWithRetry(Func<Task<IResult>> operation, int retries = 3)
+    private static async Task<IResult> ExecuteWithRetry(Func<Task<IResult>> operation, int retries = 5)
     {
         for (int attempt = 0; attempt < retries; attempt++)
         {
