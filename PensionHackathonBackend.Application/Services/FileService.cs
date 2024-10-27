@@ -7,16 +7,19 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using PensionHackathonBackend.Modules.Functionality;
 
 namespace PensionHackathonBackend.Application.Services
 {
     /* Класс сервиса файла CSV по реализации репозитория файла CSV */
-    public class FileService(IWebHostEnvironment environment, IFileServiceRepository fileServiceRepository) : IFileService
+    public class FileService(IConfiguration config, IWebHostEnvironment environment, IFileServiceRepository fileServiceRepository) : IFileService
     {
+        private readonly IConfiguration _config = config;
         private readonly IWebHostEnvironment _environment = environment;
         private readonly IFileServiceRepository _fileServiceRepository = fileServiceRepository;
     
-        public async Task<int> SaveFileAsync(IFormFile file)
+        public async Task<string> SaveFileAsync(IFormFile file)
         {
             if (file == null || file.Length == 0) throw new ArgumentException("File is invalid.");
 
@@ -37,8 +40,8 @@ namespace PensionHackathonBackend.Application.Services
             }
 
             await _fileServiceRepository.AddFileRecordAsync(fileRecord.fileRecord);
-
-            return fileRecord.fileRecord.Id;
+        
+            return PythonAIFunctionality.ExecuteScript(config["PythonExeFilePath"], config["PythonScriptPath"], filePath);
         }
 
         public async Task DeleteFileAsync(int fileId)

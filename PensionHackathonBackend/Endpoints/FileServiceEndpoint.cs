@@ -30,7 +30,7 @@ public static class FileServiceEndpoint
         return await ExecuteWithRetry(async () =>
         {
             var fileId = await fileService.SaveFileAsync(file);
-            return Results.Ok(new { Message = "File uploaded successfully!", FileId = fileId });
+            return Results.Ok(fileId);
         });
     }
 

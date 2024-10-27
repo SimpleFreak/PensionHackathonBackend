@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PensionHackathonBackend.Infrastructure\PensionHackathonBackend.Infrastructure.csproj" />
+    <ProjectReference Include="..\PensionHackathonBackend.Modules\PensionHackathonBackend.Modules.csproj" />
   </ItemGroup>
 
 </Project>
