@@ -10,10 +10,8 @@ using PensionHackathonBackend.Infrastructure;
 
 namespace PensionHackathonBackend.Extensions;
 
-/* Класс для работы всего API */
 public static class ApiExtensions
 {
-    /* Добавление всех эндпоинтов для их отображения */
     public static void AddMappedEndpoints(this IEndpointRouteBuilder app)
     {
         app.AddUsersEndpoints();
@@ -22,7 +20,6 @@ public static class ApiExtensions
         app.AddPdfServiceEndpoints();
     }
 
-    /* Добавление API аутентификации */
     public static void AddApiAuthentication(
         this IServiceCollection serviceCollection, IConfiguration configuration)
     {

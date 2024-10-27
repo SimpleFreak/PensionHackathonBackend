@@ -12,7 +12,6 @@ namespace PensionHackathonBackend.Endpoints;
 
 public static class AdminPanelEndpoint
 {
-    /* Добавление всех методов для осуществления запросов панели администрации */
     public static IEndpointRouteBuilder AddAdminPanel(
         this IEndpointRouteBuilder app)
     {
@@ -25,7 +24,20 @@ public static class AdminPanelEndpoint
         return app;
     }
 
-    /* Получение пользователей */
+    private static async Task<IResult> UserExists(int id, UserService userService)
+    {
+        try
+        {
+            var users = await userService.GetAllUsers();
+
+            return Results.Ok(users.Any(u => u.Id == id));
+        }
+        catch (Exception ex)
+        {
+            return Results.BadRequest(ex);
+        }
+    }
+
     private static async Task<IResult> GetUsers(string? sortOrder,
         string? searchString, UserService userService)
     {
@@ -56,7 +68,6 @@ public static class AdminPanelEndpoint
         }
     }
 
-    /* Получение деталей конкретного пользователя */
     private static async Task<IResult> Details(int id, UserService userService)
     {
         try
@@ -82,7 +93,6 @@ public static class AdminPanelEndpoint
         }
     }
 
-    /* Создание нового пользователя */
     private static async Task<IResult> CreateUser([FromBody] UserRequest request, UserService userService)
     {
         try
@@ -107,7 +117,6 @@ public static class AdminPanelEndpoint
         }
     }
 
-    /* Обновление данных о пользователе */
     private static async Task<IResult> UpdateUser([FromBody] UserRequest request,
         int id, UserService userService)
     {
@@ -125,7 +134,6 @@ public static class AdminPanelEndpoint
         }
     }
 
-    /* Удаление пользователя */
     private static async Task<IResult> DeleteUser(int id, UserService userService)
     {
         try

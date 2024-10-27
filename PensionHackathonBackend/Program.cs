@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
@@ -20,28 +22,22 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        /* Инициализация Web приложения */
         var builder = WebApplication.CreateBuilder(args);
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        /* Добавление API аутентификации и swagger */
         services.AddApiAuthentication(configuration);
         services.AddSwaggerGen();
-
-        /* Добаление MemoryCache */
+        
         builder.Services.AddMemoryCache();
 
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
-
-        /* Добавление контекста базы данных */
+        
         builder.Services.AddDbContext<PensionHackathonDbContext>(options =>
-            options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-        /* Добавление эндпоинтов для API браузера */
         services.AddEndpointsApiExplorer();
 
-        /* Добавление сервисов, jwt токена и хэширования паролей */
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<UserService>();
 
@@ -51,12 +47,11 @@ public class Program
         services.AddScoped<IJwtProvider, JwtProvider>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 
-        /* Добавление CORS для взаимодействия Backend и Frontend */
         services.AddCors(options =>
         {
             options.AddPolicy("AspNetApp", policyBuilder =>
             {
-                policyBuilder.WithOrigins("http://192.168.0.122:3333", "http://192.168.10.148:3333");
+                policyBuilder.WithOrigins("http://192.168.0.122:3333", "http://192.168.10.148:3333", "http://192.168.85.148:3333");
                 policyBuilder.AllowAnyHeader();
                 policyBuilder.AllowAnyMethod();
                 policyBuilder.AllowCredentials();
@@ -77,7 +72,7 @@ public class Program
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                // c.RoutePrefix = string.Empty;
+               // c.RoutePrefix = string.Empty;
             });
         }
 
@@ -91,12 +86,10 @@ public class Program
             Secure = CookieSecurePolicy.Always
         });
 
-        /* Добавление Middleware */
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         app.UseCors("AspNetApp");
 
-        /* Добавление аутентификации и авторизации */
         app.UseAuthentication();
         app.UseAuthorization();
 
@@ -106,7 +99,6 @@ public class Program
 
         app.MapGet("/", () => "Hello ForwardedHeadersOptions!");
 
-        /* Запуск итогового web-api приложения */
         app.Run();
     }
 }

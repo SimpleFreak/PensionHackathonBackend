@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace PensionHackathonBackend.Contracts.UserRequests;
+namespace PensionHackathonBackend.Contracts;
 
-/* Класс регистрации пользователя */
 public record RegisterUserRequest(
     [Required, NotNull] string Login,
     [Required, NotNull] string Password,

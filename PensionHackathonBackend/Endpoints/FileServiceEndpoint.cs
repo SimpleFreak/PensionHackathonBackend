@@ -10,18 +10,16 @@ namespace PensionHackathonBackend.Endpoints;
 
 public static class FileServiceEndpoint
 {
-    /* Добавление методов для отображения запросов по работе с файлами */
     public static IEndpointRouteBuilder AddFileServiceEndpoints(this IEndpointRouteBuilder app)
     {
         app.MapPost("UploadFile", UploadFile)
-            .DisableAntiforgery(); ;
+            .DisableAntiforgery();;
         app.MapDelete("DeleteFile/{id:int}", DeleteFile);
         app.MapGet("GetAllFiles", GetAllFilesAsync);
         app.MapGet("GetFile/{id:int}", GetFileByIdAsync);
         return app;
     }
 
-    /* Загрузка файлов */
     private static async Task<IResult> UploadFile(IFormFile file, FileService fileService)
     {
         if (file == null || file.Length == 0)
@@ -32,11 +30,10 @@ public static class FileServiceEndpoint
         return await ExecuteWithRetry(async () =>
         {
             var fileId = await fileService.SaveFileAsync(file);
-            return Results.Ok(new { Message = "File uploaded successfully!", FileId = fileId });
+            return Results.Ok(fileId);
         });
     }
 
-    /* Удаление файла */
     private static async Task<IResult> DeleteFile(int id, FileService fileService)
     {
         return await ExecuteWithRetry(async () =>
@@ -45,8 +42,7 @@ public static class FileServiceEndpoint
             return Results.Ok("File deleted successfully.");
         });
     }
-
-    /* Получение всех файлов */
+    
     private static async Task<IResult> GetAllFilesAsync(FileService fileService)
     {
         return await ExecuteWithRetry(async () =>
@@ -56,7 +52,6 @@ public static class FileServiceEndpoint
         });
     }
 
-    /* Получение конкретного файла по идентификатору */
     private static async Task<IResult> GetFileByIdAsync(int id, FileService fileService)
     {
         return await ExecuteWithRetry(async () =>
@@ -67,8 +62,7 @@ public static class FileServiceEndpoint
                 : Results.NotFound(new { Message = "File not found." });
         });
     }
-
-    /* Выполнение с повторением */
+    
     private static async Task<IResult> ExecuteWithRetry(Func<Task<IResult>> operation, int retries = 5)
     {
         for (int attempt = 0; attempt < retries; attempt++)
@@ -90,7 +84,7 @@ public static class FileServiceEndpoint
                     return Results.BadRequest($"Error occurred: {ex.Message}");
                 }
 
-                await Task.Delay(1000);
+                await Task.Delay(1000); 
             }
         }
 

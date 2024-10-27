@@ -22,7 +22,7 @@ namespace PensionHackathonBackend.Core.Models
             FileName = fileName;
             DateAdded = dateAdded;
         }
-
+        
         public FileRecord(int id)
         {
             Id = id;

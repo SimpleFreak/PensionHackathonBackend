@@ -3,6 +3,7 @@ using PensionHackathonBackend.Core.Abstractions;
 using PensionHackathonBackend.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -16,7 +17,6 @@ namespace PensionHackathonBackend.DataAccess.Repositories
         
         private const string GetFilesCacheKey = "GetFilesCache";
         
-        /* Добавление файла */
         public async Task<int> AddFileRecordAsync(FileRecord fileRecord)
         {
             await _context.FileRecords.AddAsync(fileRecord);
@@ -28,7 +28,6 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return fileRecord.Id;
         }
 
-        /* Получение файла */
         public async Task<FileRecord?> GetFileRecordAsync(int fileId)
         {
             return await _context.FileRecords
@@ -36,7 +35,6 @@ namespace PensionHackathonBackend.DataAccess.Repositories
                 .FirstOrDefaultAsync(f => f.Id == fileId);
         }
 
-        /* Получение всех файлов */
         public async Task<List<FileRecord>> GetFilesAsync()
         {
             if (!_cache.TryGetValue(GetFilesCacheKey, out List<FileRecord> files))
@@ -56,7 +54,6 @@ namespace PensionHackathonBackend.DataAccess.Repositories
             return files;
         }
 
-        /* Удаление файла */
         public async Task DeleteFileRecordAsync(int fileId)
         {
             var fileRecord = await _context.FileRecords.FindAsync(fileId);
