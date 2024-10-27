@@ -24,7 +24,6 @@ namespace PensionHackathonBackend.Application.Services
             if (file == null || file.Length == 0) throw new ArgumentException("File is invalid.");
 
             string zipUploadFile = Path.Combine(_environment.WebRootPath, "files");
-            string pdfUploadFile = Path.Combine(_environment.WebRootPath, "pdfs");
 
             // Создаем директории, если их нет
             if (!Directory.Exists(zipUploadFile))
@@ -32,14 +31,10 @@ namespace PensionHackathonBackend.Application.Services
                 Directory.CreateDirectory(zipUploadFile);
             }
 
-            if (!Directory.Exists(pdfUploadFile))
-            {
-                Directory.CreateDirectory(pdfUploadFile);
-            }
-
             // Генерация имени файла
             var fileRecord = FileRecord.Create(file.FileName, DateTime.Today);
             var fileName = $"{fileRecord.fileRecord.Id}_{fileRecord.fileRecord.FileName}";
+            
             
             string filePath = Path.Combine(zipUploadFile, fileName);
 
@@ -50,16 +45,10 @@ namespace PensionHackathonBackend.Application.Services
 
             await _fileServiceRepository.AddFileRecordAsync(fileRecord.fileRecord);
         
+          //  var pythonScriptPath = Path.Combine(_environment.WebRootPath, "python");
             // Выполнение Python-скрипта
             var aiResult =  PythonAIFunctionality.ExecuteScript(_config["PythonExeFilePath"], _config["PythonScriptPath"], filePath);
-
-            // Создание PDF из результата
-            var documentBytes = PdfCreator.CreatePDF(aiResult);
-            var pdfFilePath = Path.Combine(pdfUploadFile, $"{fileName}.pdf");
             
-            // Запись PDF в файл
-            await File.WriteAllBytesAsync(pdfFilePath, documentBytes);
-
             return aiResult;
         }
 
