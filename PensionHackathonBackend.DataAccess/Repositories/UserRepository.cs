@@ -33,7 +33,7 @@ namespace PensionHackathonBackend.DataAccess.Repositories
 
             var users = userEntities
                 .Select(user => User
-                    .Create(user.Login, user.Password, user.Role).User)
+                    .Create(user.Id, user.Login, user.Password, user.Role).User)
                 .ToList();
 
             return users;

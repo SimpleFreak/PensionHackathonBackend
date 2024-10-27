@@ -39,7 +39,7 @@ public static class UsersEndpoint
 
         context.Response.Cookies.Append("tasty-cookies", token);
 
-        return Results.Ok();
+        return Results.Ok(token);
     }
 
     private static async Task<IResult> Delete(int id, UserService userService, HttpContext context)

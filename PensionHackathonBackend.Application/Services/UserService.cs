@@ -41,9 +41,9 @@ namespace PensionHackathonBackend.Application.Services
                 throw new Exception("Failed to login");
             }
 
-            var token = _jwtProvider.GenerateToken(user);
+            //var token = _jwtProvider.GenerateToken(user);
 
-            return token;
+            return user.Role;
         }
 
         public async Task<List<User>> GetAllUsers()
