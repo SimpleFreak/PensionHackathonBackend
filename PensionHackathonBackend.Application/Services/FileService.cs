@@ -23,16 +23,25 @@ namespace PensionHackathonBackend.Application.Services
         {
             if (file == null || file.Length == 0) throw new ArgumentException("File is invalid.");
 
-            string uploadPath = Path.Combine(_environment.WebRootPath, "files");
+            string zipUploadFile = Path.Combine(_environment.WebRootPath, "files");
+            string pdfUploadFile = Path.Combine(_environment.WebRootPath, "pdfs");
 
-            if (!Directory.Exists(uploadPath))
+            // Создаем директории, если их нет
+            if (!Directory.Exists(zipUploadFile))
             {
-                Directory.CreateDirectory(uploadPath);
+                Directory.CreateDirectory(zipUploadFile);
             }
 
+            if (!Directory.Exists(pdfUploadFile))
+            {
+                Directory.CreateDirectory(pdfUploadFile);
+            }
+
+            // Генерация имени файла
             var fileRecord = FileRecord.Create(file.FileName, DateTime.Today);
             var fileName = $"{fileRecord.fileRecord.Id}_{fileRecord.fileRecord.FileName}";
-            string filePath = Path.Combine(uploadPath, fileName);
+            
+            string filePath = Path.Combine(zipUploadFile, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
@@ -41,7 +50,17 @@ namespace PensionHackathonBackend.Application.Services
 
             await _fileServiceRepository.AddFileRecordAsync(fileRecord.fileRecord);
         
-            return PythonAIFunctionality.ExecuteScript(config["PythonExeFilePath"], config["PythonScriptPath"], filePath);
+            // Выполнение Python-скрипта
+            var aiResult =  PythonAIFunctionality.ExecuteScript(_config["PythonExeFilePath"], _config["PythonScriptPath"], filePath);
+
+            // Создание PDF из результата
+            var documentBytes = PdfCreator.CreatePDF(aiResult);
+            var pdfFilePath = Path.Combine(pdfUploadFile, $"{fileName}.pdf");
+            
+            // Запись PDF в файл
+            await File.WriteAllBytesAsync(pdfFilePath, documentBytes);
+
+            return aiResult;
         }
 
         public async Task DeleteFileAsync(int fileId)
