@@ -45,9 +45,9 @@ namespace PensionHackathonBackend.Application.Services
 
             await _fileServiceRepository.AddFileRecordAsync(fileRecord.fileRecord);
         
-          //  var pythonScriptPath = Path.Combine(_environment.WebRootPath, "python");
+           var pythonScriptPath = Path.Combine(_environment.WebRootPath, "python");
             // Выполнение Python-скрипта
-            var aiResult =  PythonAIFunctionality.ExecuteScript(_config["PythonExeFilePath"], _config["PythonScriptPath"], filePath);
+            var aiResult =  PythonAIFunctionality.ExecuteScript(_config["PythonExeFilePath"], pythonScriptPath, filePath);
             
             return aiResult;
         }
