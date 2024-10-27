@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +34,7 @@ public class Program
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
         
         builder.Services.AddDbContext<PensionHackathonDbContext>(options =>
-            options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         services.AddEndpointsApiExplorer();
 
